@@ -1,0 +1,17 @@
+{
+    "manifest_version": 3,
+    "name": "我的收藏夹",
+    "version": "1.0",
+    "description": "收藏夹，方便保存网页链接",
+
+    "permissions": [
+      "storage"
+    ],
+    "action": {
+      "default_popup": "popup.html"
+    },
+    "background": {
+      "service_worker": "background.js"
+    }
+  }
+  

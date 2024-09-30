@@ -1,0 +1,3 @@
+net user wen /active:no
+net user wen /active:yes
+Administrators

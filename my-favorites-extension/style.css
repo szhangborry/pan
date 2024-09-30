@@ -1,0 +1,35 @@
+body {
+    font-family: Arial, sans-serif;
+    width: 300px;  /* 增加宽度 */
+    height: 400px; /* 增加高度 */
+}
+
+h1 {
+    font-size: 18px; /* 增加标题字体大小 */
+}
+
+input {
+    width: 100%;
+    margin-bottom: 10px; /* 增加下边距 */
+}
+
+ul {
+    list-style: none; /* 去掉列表样式 */
+    padding: 0; /* 去掉内边距 */
+}
+
+button {
+    margin-left: 10px; /* 增加按钮之间的间距 */
+}
+
+ul {
+    list-style: none; /* 去掉列表样式 */
+    padding: 0; /* 去掉内边距 */
+}
+
+li {
+    display: flex; /* 使用弹性布局 */
+    justify-content: space-between; /* 按钮和文本两端对齐 */
+    align-items: center; /* 垂直居中 */
+    margin-bottom: 5px; /* 增加每个项目的下边距 */
+}
