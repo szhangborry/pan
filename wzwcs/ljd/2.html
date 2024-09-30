@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录页面</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .login-container h2 {
+            margin-bottom: 20px;
+        }
+        .login-container input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        .login-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .login-container button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <h2>登录</h2>
+    <input type="text" id="username" placeholder="用户名" required />
+    <input type="password" id="password" placeholder="密码" required />
+    <button onclick="login()">登录</button>
+</div>
+
+<script>
+    let users = [];
+
+    // 读取 Excel 文件
+    function readExcelFile(file) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            const data = new Uint8Array(event.target.result);
+            const workbook = XLSX.read(data, { type: "array" });
+            const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+            const jsonData = XLSX.utils.sheet_to_json(firstSheet, { header: 1 });
+
+            // 假设第一列为用户名，第二列为密码
+            users = jsonData.slice(1).map(row => ({
+                username: row[0],
+                password: row[1]
+            }));
+
+            console.log(users); // 输出读取的用户数据
+        };
+
+        reader.readAsArrayBuffer(file);
+    }
+
+    // 在页面加载时读取 Excel 文件
+    window.onload = function() {
+        fetch('../aaa.xlsx')
+            .then(response => response.blob())
+            .then(blob => {
+                readExcelFile(blob);
+            })
+            .catch(err => {
+                console.error("读取文件时出错:", err);
+            });
+    };
+
+    function login() {
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+
+        // 验证用户
+        const user = users.find(user => user.username === username && user.password === password);
+        
+        if (user) {
+            alert("登录成功");
+            window.location.href = "../index.html"; // 跳转到主页
+        } else {
+            alert("用户名或密码错误");
+            // 可根据需求清空输入框
+            document.getElementById("password").value = '';
+        }
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+/* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f4f8; /* 背景颜色为淡蓝色 */
+    margin: 0;
+    padding: 0;
+    opacity: 0; /* 初始透明度为0 */
+    animation: fadeIn 1s forwards; /* 加入渐入动画 */
+}
+
+.header {
+    background-color: #607d8b; /* 深蓝灰色 */
+    color: white;
+    text-align: center;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.navbar {
+    background-color: #455a64; /* 深蓝灰色 */
+    overflow: hidden;
+}
+
+.nav-link {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.nav-link:hover {
+    background-color: #37474f; /* 更深的蓝灰色作为悬停效果 */
+}
+
+/* 渐入动画定义 */
+@keyframes fadeIn {
+    from {
+        opacity: 0; /* 开始时透明度为0 */
+    }
+    to {
+        opacity: 1; /* 结束时透明度为1 */
+    }
+}

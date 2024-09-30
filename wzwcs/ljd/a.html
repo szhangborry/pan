@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>读取 Excel 文件</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <style>
+        body{
+        width: 100%;
+            background-repeat:no-repeat;
+            background-size:100% ;
+        }
+        .login{
+            float:right;
+            margin-right:20vh;
+          margin-top:15vh;
+            opacity:0.7;
+            height: 35vh;
+            width:50vh;
+            background:#CCFF80;
+            border-radius: 20px;
+        }
+        .title{
+            font-size:30px;
+            text-align:center;
+        }
+        .biao{
+            margin-top:20px;
+            font-size:20px;
+            text-align:center;
+        }
+        </style>
+</head>
+<body>
+    <script>
+        fetch('./aaa.xlsx') // 替换为相对路径
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.arrayBuffer();
+            })
+            .then(data => {
+                const workbook = XLSX.read(data, { type: 'array' });
+                const firstSheetName = workbook.SheetNames[0];
+                const worksheet = workbook.Sheets[firstSheetName];
+
+                // 将数据转换为二维数组
+                const axlsx = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+                //console.log(axlsx.length); // 打印在控制台
+            })
+            .catch(error => console.error('Error reading the Excel file:', error));
+                /**
+         * 检查用户输入的用户名和密码是否正确
+         * 如果正确，弹出提示框显示"登录成功"
+         * 如果不正确，弹出提示框显示"用户名或密码错误"
+         */
+        function infoConfirmed(){
+            // 获取名为 "user" 的输入框的值
+            var user=document.getElementsByName('user').value;
+            // 获取名为 "pwd" 的输入框的值
+            var pwd=document.getElementsByName('pwd').value;
+            // 在控制台输出用户和密码
+            console.log(user,pwd);
+            // 遍历数组 axlsx
+            for(var i=0;i<axlsx.length;i++){
+                // 如果数组中的某一项的第一个元素等于用户输入的用户名，并且第二个元素等于用户输入的密码
+                if(axlsx[i][0]==user && axlsx[i][1]==pwd){
+                    // 弹出提示框，显示"登录成功"
+                    alert("登录成功");
+                    location.href="index.html"; // 跳转到主页
+            // 如果用户名或密码不正确
+            }
+            else{
+                // 弹出提示框，显示"用户名或密码错误"
+                alert("用户名或密码错误");
+                // 跳出循环
+                break;
+            }
+        }
+    }
+
+    </script>
+    <div>
+		<div class='login'>
+			<div class='title'>欢迎登录</div>
+			<div class='biao'>
+                
+				<label>用户：</label><input type="text" name='user'><br><br>
+				<label>密码：</label><input type="password" name='pwd'><br>
+				<button onclick="infoConfirmed()" style='width:240px;height:30px;margin-top:25px;background:#B7FF4A'>登录</button>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

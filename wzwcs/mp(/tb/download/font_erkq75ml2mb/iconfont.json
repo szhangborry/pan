@@ -1,0 +1,30 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "778674",
+      "name": "wx",
+      "font_class": "yooxi",
+      "unicode": "e60e",
+      "unicode_decimal": 58894
+    },
+    {
+      "icon_id": "4936984",
+      "name": "QQ",
+      "font_class": "QQ",
+      "unicode": "e882",
+      "unicode_decimal": 59522
+    },
+    {
+      "icon_id": "39248992",
+      "name": "bilibili-line",
+      "font_class": "bilibili-line",
+      "unicode": "ea96",
+      "unicode_decimal": 60054
+    }
+  ]
+}
